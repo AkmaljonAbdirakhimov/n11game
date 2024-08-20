@@ -12,7 +12,7 @@ class PlatformBlock extends SpriteComponent
   PlatformBlock({
     required this.gridPosition,
     required this.xOffset,
-  }) : super(size: Vector2.all(64), anchor: Anchor.bottomLeft);
+  }) : super(size: Vector2.all(32), anchor: Anchor.bottomLeft);
 
   @override
   void onLoad() {

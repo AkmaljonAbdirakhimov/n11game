@@ -23,7 +23,7 @@ class Hud extends PositionComponent with HasGameReference<EmberQuestGame> {
       text: '${game.starsCollected}',
       textRenderer: TextPaint(
         style: const TextStyle(
-          fontSize: 32,
+          fontSize: 16,
           color: Color.fromRGBO(10, 10, 10, 1),
         ),
       ),
@@ -36,19 +36,19 @@ class Hud extends PositionComponent with HasGameReference<EmberQuestGame> {
     add(
       SpriteComponent(
         sprite: starSprite,
-        position: Vector2(game.size.x - 100, 20),
-        size: Vector2.all(32),
+        position: Vector2(game.size.x - 80, 20),
+        size: Vector2.all(16),
         anchor: Anchor.center,
       ),
     );
 
     for (var i = 1; i <= game.health; i++) {
-      final positionX = 40 * i;
+      final positionX = 20 * i;
       await add(
         HeartHealthComponent(
           heartNumber: i,
           position: Vector2(positionX.toDouble(), 20),
-          size: Vector2.all(32),
+          size: Vector2.all(16),
         ),
       );
     }

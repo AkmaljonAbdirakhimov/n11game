@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'actors/actors.dart';
 import 'managers/segment_manager.dart';
 import 'objects/objects.dart';
-import 'overlays/hud.dart';
+import 'overlays/overlays.dart';
 
 class EmberQuestGame extends FlameGame
     with HasCollisionDetection, HasKeyboardHandlerComponents {
@@ -36,15 +36,15 @@ class EmberQuestGame extends FlameGame
 
   void initializeGame(bool loadHud) {
     // Assume that size.x < 3200
-    final segmentsToLoad = (size.x / 640).ceil();
+    final segmentsToLoad = (size.x / 320).ceil();
     segmentsToLoad.clamp(0, segments.length);
 
     for (var i = 0; i <= segmentsToLoad; i++) {
-      loadGameSegments(i, (640 * i).toDouble());
+      loadGameSegments(i, (320 * i).toDouble());
     }
 
     _ember = EmberPlayer(
-      position: Vector2(128, canvasSize.y - 128),
+      position: Vector2(64, canvasSize.y - 128),
     );
     add(_ember);
     if (loadHud) {
@@ -89,6 +89,25 @@ class EmberQuestGame extends FlameGame
     starsCollected = 0;
     health = 3;
     initializeGame(false);
+  }
+
+  void movePlayer(Direction direction) {
+    switch (direction) {
+      case Direction.left:
+        _ember.horizontalDirection = -1;
+        break;
+      case Direction.right:
+        _ember.horizontalDirection = 1;
+        break;
+    }
+  }
+
+  void jumpPlayer() {
+    _ember.hasJumped = true;
+  }
+
+  void stopPlayer() {
+    _ember.horizontalDirection = 0;
   }
 
   @override

@@ -32,13 +32,12 @@ class GameOver extends StatelessWidget {
                 'Game Over',
                 style: TextStyle(
                   color: whiteTextColor,
-                  fontSize: 24,
+                  fontSize: 22,
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               SizedBox(
-                width: 200,
-                height: 75,
+                width: 150,
                 child: ElevatedButton(
                   onPressed: () {
                     game.reset();
@@ -50,7 +49,7 @@ class GameOver extends StatelessWidget {
                   child: const Text(
                     'Play Again',
                     style: TextStyle(
-                      fontSize: 28.0,
+                      fontSize: 20.0,
                       color: blackTextColor,
                     ),
                   ),

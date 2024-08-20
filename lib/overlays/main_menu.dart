@@ -21,7 +21,7 @@ class MainMenu extends StatelessWidget {
           width: 300,
           decoration: const BoxDecoration(
             color: blackTextColor,
-            borderRadius: const BorderRadius.all(
+            borderRadius: BorderRadius.all(
               Radius.circular(20),
             ),
           ),
@@ -33,13 +33,12 @@ class MainMenu extends StatelessWidget {
                 'Ember Quest',
                 style: TextStyle(
                   color: whiteTextColor,
-                  fontSize: 24,
+                  fontSize: 22,
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 10),
               SizedBox(
-                width: 200,
-                height: 75,
+                width: 150,
                 child: ElevatedButton(
                   onPressed: () {
                     game.overlays.remove('MainMenu');
@@ -50,7 +49,7 @@ class MainMenu extends StatelessWidget {
                   child: const Text(
                     'Play',
                     style: TextStyle(
-                      fontSize: 40.0,
+                      fontSize: 20.0,
                       color: blackTextColor,
                     ),
                   ),

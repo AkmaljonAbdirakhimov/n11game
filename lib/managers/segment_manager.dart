@@ -3,8 +3,6 @@ import 'package:flame/components.dart';
 import '../actors/actors.dart';
 import '../objects/objects.dart';
 
-
-
 class Block {
   // gridPosition position is always segment based X,Y.
   // 0,0 is the bottom left corner.
