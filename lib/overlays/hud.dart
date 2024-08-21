@@ -16,6 +16,8 @@ class Hud extends PositionComponent with HasGameReference<EmberQuestGame> {
   });
 
   late TextComponent _scoreTextComponent;
+  late TextComponent _timerTextComponent;
+  late TextComponent _levelTextComponent;
 
   @override
   Future<void> onLoad() async {
@@ -31,6 +33,32 @@ class Hud extends PositionComponent with HasGameReference<EmberQuestGame> {
       position: Vector2(game.size.x - 60, 20),
     );
     add(_scoreTextComponent);
+
+    _timerTextComponent = TextComponent(
+      text: 'Time: ${game.remainingTime}',
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          fontSize: 16,
+          color: Color.fromRGBO(10, 10, 10, 1),
+        ),
+      ),
+      anchor: Anchor.center,
+      position: Vector2(game.size.x / 1.5, 20),
+    );
+    add(_timerTextComponent);
+
+    _levelTextComponent = TextComponent(
+      text: 'Level: ${game.currentLevel}',
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          fontSize: 16,
+          color: Color.fromRGBO(10, 10, 10, 1),
+        ),
+      ),
+      anchor: Anchor.center,
+      position: Vector2(game.size.x / 3, 20),
+    );
+    add(_levelTextComponent);
 
     final starSprite = await game.loadSprite('star.png');
     add(
@@ -57,5 +85,7 @@ class Hud extends PositionComponent with HasGameReference<EmberQuestGame> {
   @override
   void update(double dt) {
     _scoreTextComponent.text = '${game.starsCollected}';
+    _timerTextComponent.text = 'Time: ${game.remainingTime}';
+    _levelTextComponent.text = 'Level: ${game.currentLevel}';
   }
 }

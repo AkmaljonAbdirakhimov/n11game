@@ -41,6 +41,7 @@ class MainMenu extends StatelessWidget {
                 width: 150,
                 child: ElevatedButton(
                   onPressed: () {
+                    game.start();
                     game.overlays.remove('MainMenu');
                   },
                   style: ElevatedButton.styleFrom(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:n11game/ember_quest.dart';
 
-enum Direction { left, right }
+import 'joystick.dart';
+
+enum Direction { left, right, none }
 
 class GameControls extends StatelessWidget {
   final EmberQuestGame game;
@@ -12,57 +14,40 @@ class GameControls extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // Joystick for movement
         Positioned(
           bottom: 50,
           left: 20,
-          right: 20,
-          child: Row(
-            children: [
-              GestureDetector(
-                onTapDown: (_) => game.movePlayer(Direction.left),
-                onTapUp: (_) => game.stopPlayer(),
-                child: ElevatedButton(
-                  onPressed: null,
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(15),
-                  ),
-                  child: const Icon(Icons.arrow_left),
-                ),
-              ),
-              const SizedBox(width: 20),
-              GestureDetector(
-                onTapDown: (_) => game.movePlayer(Direction.right),
-                onTapUp: (_) => game.stopPlayer(),
-                child: ElevatedButton(
-                  onPressed: null,
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(15),
-                  ),
-                  child: const Icon(Icons.arrow_right),
-                ),
-              ),
-            ],
+          child: Joystick(
+            onDirectionChanged: (direction) {
+              switch (direction) {
+                case Direction.left:
+                  game.movePlayer(Direction.left);
+                  break;
+                case Direction.right:
+                  game.movePlayer(Direction.right);
+                  break;
+                case Direction.none:
+                  game.stopPlayer();
+                  break;
+              }
+            },
           ),
         ),
+        // Jump button
         Positioned(
           bottom: 50,
           right: 20,
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: () => game.jumpPlayer(),
-                child: ElevatedButton(
-                  onPressed: null,
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(15),
-                  ),
-                  child: const Icon(Icons.circle),
-                ),
+          child: GestureDetector(
+            onTap: () => game.jumpPlayer(),
+            child: ElevatedButton(
+              onPressed: null,
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(30),
               ),
-            ],
+              child: const Icon(Icons.arrow_upward),
+            ),
           ),
         ),
       ],

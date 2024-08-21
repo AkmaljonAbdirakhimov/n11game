@@ -21,7 +21,7 @@ class GameOver extends StatelessWidget {
           width: 300,
           decoration: const BoxDecoration(
             color: blackTextColor,
-            borderRadius: const BorderRadius.all(
+            borderRadius: BorderRadius.all(
               Radius.circular(20),
             ),
           ),
