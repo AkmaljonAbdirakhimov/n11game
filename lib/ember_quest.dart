@@ -34,6 +34,7 @@ class EmberQuestGame extends FlameGame
       'heart.png',
       'star.png',
       'water_enemy.png',
+      'fire.png',
     ]);
 
     camera.viewfinder.anchor = Anchor.topLeft;
@@ -136,10 +137,10 @@ class EmberQuestGame extends FlameGame
   void movePlayer(Direction direction) {
     switch (direction) {
       case Direction.left:
-        _ember!.horizontalDirection = -1;
+        _ember.horizontalDirection = -1;
         break;
       case Direction.right:
-        _ember!.horizontalDirection = 1;
+        _ember.horizontalDirection = 1;
         break;
       case Direction.none:
         break;
@@ -152,6 +153,17 @@ class EmberQuestGame extends FlameGame
 
   void stopPlayer() {
     _ember!.horizontalDirection = 0;
+  }
+
+  void fireWeapon() {
+    final fireWeapon = FireWeapon(
+      initialPosition: _ember.position +
+          Vector2(16, 0), // Position the fireball relative to the player
+      direction: _ember.direction == Direction.left
+          ? Vector2(-0.5, 0)
+          : Vector2(0.5, 0), // Move to the right
+    );
+    add(fireWeapon);
   }
 
   @override

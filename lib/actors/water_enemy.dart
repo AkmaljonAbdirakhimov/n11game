@@ -3,9 +3,10 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 
 import '../ember_quest.dart';
+import '../objects/objects.dart';
 
 class WaterEnemy extends SpriteAnimationComponent
-    with HasGameReference<EmberQuestGame> {
+    with CollisionCallbacks, HasGameReference<EmberQuestGame> {
   final Vector2 gridPosition;
   double xOffset;
 
@@ -31,6 +32,7 @@ class WaterEnemy extends SpriteAnimationComponent
       game.size.y - (gridPosition.y * size.y),
     );
     add(RectangleHitbox(collisionType: CollisionType.passive));
+    add(CircleHitbox());
     add(
       MoveEffect.by(
         Vector2(-2 * size.x, 0),
@@ -41,6 +43,17 @@ class WaterEnemy extends SpriteAnimationComponent
         ),
       ),
     );
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (other is FireWeapon) {
+      // Handle collision with FireWeapon
+      removeFromParent(); // Remove the WaterEnemy
+      other.removeFromParent(); // Remove the FireWeapon
+    }
+
+    super.onCollision(intersectionPoints, other);
   }
 
   @override

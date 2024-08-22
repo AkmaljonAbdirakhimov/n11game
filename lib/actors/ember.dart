@@ -2,6 +2,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/services.dart';
+import 'package:n11game/overlays/overlays.dart';
 import '../ember_quest.dart';
 import '../objects/objects.dart';
 import 'actors.dart';
@@ -17,6 +18,7 @@ class EmberPlayer extends SpriteAnimationComponent
   final double moveSpeed = 200;
   final Vector2 fromAbove = Vector2(0, -1);
   bool isOnGround = false;
+  Direction direction = Direction.right;
   final double gravity = 30;
   final double jumpSpeed = 600;
   final double terminalVelocity = 150;
@@ -109,8 +111,10 @@ class EmberPlayer extends SpriteAnimationComponent
     velocity.x = horizontalDirection * moveSpeed;
 
     if (horizontalDirection < 0 && scale.x > 0) {
+      direction = Direction.left;
       flipHorizontally();
     } else if (horizontalDirection > 0 && scale.x < 0) {
+      direction = Direction.right;
       flipHorizontally();
     }
 
