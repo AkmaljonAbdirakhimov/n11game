@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:n11game/ember_quest.dart';
 
@@ -6,21 +5,10 @@ import 'joystick.dart';
 
 enum Direction { left, right, none }
 
-class GameControls extends StatefulWidget {
+class GameControls extends StatelessWidget {
   final EmberQuestGame game;
 
   const GameControls({super.key, required this.game});
-
-  @override
-  State<GameControls> createState() => _GameControlsState();
-}
-
-class _GameControlsState extends State<GameControls> {
-  final _audioPlayer = AudioPlayer();
-
-  void playSound(String path) async {
-    await _audioPlayer.play(AssetSource(path));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +22,13 @@ class _GameControlsState extends State<GameControls> {
             onDirectionChanged: (direction) {
               switch (direction) {
                 case Direction.left:
-                  widget.game.movePlayer(Direction.left);
+                  game.movePlayer(Direction.left);
                   break;
                 case Direction.right:
-                  widget.game.movePlayer(Direction.right);
+                  game.movePlayer(Direction.right);
                   break;
                 case Direction.none:
-                  widget.game.stopPlayer();
+                  game.stopPlayer();
                   break;
               }
             },
@@ -52,9 +40,7 @@ class _GameControlsState extends State<GameControls> {
           right: 100,
           child: ElevatedButton(
             onPressed: () {
-              widget.game
-                  .fireWeapon(); // Call the fire function when the button is pressed
-              playSound('sounds/gun.ogg');
+              game.fireWeapon();
             },
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
@@ -69,7 +55,7 @@ class _GameControlsState extends State<GameControls> {
           bottom: 50,
           right: 20,
           child: ElevatedButton(
-            onPressed: () => widget.game.jumpPlayer(),
+            onPressed: () => game.jumpPlayer(),
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
               padding: const EdgeInsets.all(30),

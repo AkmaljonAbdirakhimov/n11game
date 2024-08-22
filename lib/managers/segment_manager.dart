@@ -13,10 +13,10 @@ List<List<ObjectBlock>> generateRandomSegments(int count) {
     List<ObjectBlock> segment = [];
     List<List<bool>> occupied = List.generate(10, (_) => List.filled(6, false));
 
-    // Add ground blocks with rare gaps
+    // Add ground blocks with rare gaps, but ensure the first 3 blocks are always ground
     for (int x = 0; x < 10; x++) {
-      if (random.nextDouble() > 0.05) {
-        // 5% chance to create a gap
+      if (x < 3 || random.nextDouble() > 0.05) {
+        // Always add ground for first 3 blocks, then 5% chance to create a gap
         segment.add(ObjectBlock(
             blockType: GroundBlock, gridPosition: Vector2(x.toDouble(), 0)));
         occupied[x][0] = true;
@@ -55,11 +55,12 @@ List<List<ObjectBlock>> generateRandomSegments(int count) {
       }
     }
 
-    // Add fewer water enemies on ground or platforms
+    // Add fewer water enemies on ground or platforms, starting from the middle of the segment
     int waterEnemiesCount = 0;
     while (waterEnemiesCount < 1) {
       // Ensure only 1 water enemy per segment
-      int x = random.nextInt(10);
+      int x = random.nextInt(5) +
+          5; // Place water enemies in the second half of the segment
       for (int y = 1; y <= 4; y++) {
         // Search for a ground or platform to place the water enemy
         if (occupied[x][y - 1] && !occupied[x][y]) {

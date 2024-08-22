@@ -65,6 +65,9 @@ class FireWeapon extends SpriteAnimationComponent
     if (position.x > (initialPosition.x + fireDistance) ||
         position.x > game.size.x) {
       removeFromParent();
+    } else if (position.x < (initialPosition.x - fireDistance) ||
+        position.x < 0) {
+      removeFromParent();
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 
 import 'actors/actors.dart';
@@ -35,6 +36,12 @@ class EmberQuestGame extends FlameGame
       'star.png',
       'water_enemy.png',
       'fire.png',
+    ]);
+    await FlameAudio.audioCache.loadAll([
+      'gun.mp3',
+      'start.mp3',
+      'game_over.mp3',
+      'jump.mp3',
     ]);
 
     camera.viewfinder.anchor = Anchor.topLeft;
@@ -148,11 +155,12 @@ class EmberQuestGame extends FlameGame
   }
 
   void jumpPlayer() {
-    _ember!.hasJumped = true;
+    _ember.hasJumped = true;
+    FlameAudio.play('jump.mp3');
   }
 
   void stopPlayer() {
-    _ember!.horizontalDirection = 0;
+    _ember.horizontalDirection = 0;
   }
 
   void fireWeapon() {
@@ -164,6 +172,7 @@ class EmberQuestGame extends FlameGame
           : Vector2(0.5, 0), // Move to the right
     );
     add(fireWeapon);
+    FlameAudio.play('gun.mp3');
   }
 
   @override

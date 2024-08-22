@@ -7,8 +7,8 @@ environment:
   sdk: ">=3.4.3 <4.0.0"
 
 dependencies:
-  audioplayers: ^6.0.0
   flame: ^1.18.0
+  flame_audio: ^2.10.2
   flutter:
     sdk: flutter
   flutter_joystick: ^0.2.1
@@ -23,4 +23,7 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/sounds/
+    - assets/audio/gun.mp3
+    - assets/audio/game_over.mp3
+    - assets/audio/jump.mp3
+    - assets/audio/start.mp3

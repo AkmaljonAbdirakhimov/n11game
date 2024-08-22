@@ -1,6 +1,7 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
 import 'package:n11game/overlays/overlays.dart';
 import '../ember_quest.dart';
@@ -52,6 +53,10 @@ class EmberPlayer extends SpriteAnimationComponent
         : 0;
 
     hasJumped = keysPressed.contains(LogicalKeyboardKey.space);
+
+    if (keysPressed.contains(LogicalKeyboardKey.keyE)) {
+      game.fireWeapon();
+    }
 
     return true;
   }
@@ -121,6 +126,7 @@ class EmberPlayer extends SpriteAnimationComponent
     velocity.y += gravity;
 
     if (hasJumped) {
+      FlameAudio.play('jump.mp3');
       if (isOnGround) {
         velocity.y = -jumpSpeed;
         isOnGround = false;
