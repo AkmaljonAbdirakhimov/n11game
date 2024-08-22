@@ -35,6 +35,7 @@ class EmberQuestGame extends FlameGame
       'heart.png',
       'star.png',
       'water_enemy.png',
+      'water_big_enemy.png',
       'fire.png',
     ]);
     await FlameAudio.audioCache.loadAll([
@@ -67,7 +68,7 @@ class EmberQuestGame extends FlameGame
     _ember = EmberPlayer(
       position: Vector2(64, canvasSize.y - 128),
     );
-    add(_ember!);
+    add(_ember);
 
     if (loadHud) {
       add(Hud());
@@ -121,6 +122,17 @@ class EmberQuestGame extends FlameGame
               xOffset: xPositionOffset,
             ),
           );
+        case const (WaterBigEnemy):
+          final bigEnemy = WaterBigEnemy(
+            gridPosition: block.gridPosition,
+            xOffset: xPositionOffset,
+          );
+          final healthBar = HealthBar(
+            enemy: bigEnemy,
+            maxWidth: bigEnemy.size.x,
+          );
+          world.add(bigEnemy);
+          world.add(healthBar);
       }
     }
   }

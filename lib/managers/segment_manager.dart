@@ -75,6 +75,27 @@ List<List<ObjectBlock>> generateRandomSegments(int count) {
       }
     }
 
+    // Add fewer water enemies on ground or platforms, starting from the middle of the segment
+    int waterBigEnemiesCount = 0;
+    while (waterBigEnemiesCount < 1) {
+      // Ensure only 1 water enemy per segment
+      int x = random.nextInt(5) +
+          5; // Place water enemies in the second half of the segment
+      for (int y = 1; y <= 4; y++) {
+        // Search for a ground or platform to place the water enemy
+        if (occupied[x][y - 1] && !occupied[x][y]) {
+          // Place water enemy on a ground or platform
+          segment.add(ObjectBlock(
+            blockType: WaterBigEnemy,
+            gridPosition: Vector2(x.toDouble(), y.toDouble()),
+          ));
+          occupied[x][y] = true;
+          waterBigEnemiesCount++;
+          break;
+        }
+      }
+    }
+
     randomSegments.add(segment);
   }
 
