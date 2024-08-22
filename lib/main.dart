@@ -28,7 +28,3 @@ void main() {
     ),
   );
 }
-
-// Todo - Jostik qo'shish; Bo'sh joylarni kamaytiramiz; Level qo'shish
-//? Level 1 - Timer (3 daqiqa) 10 ta yulduzcha yig'ish kerak
-//? Level 2 -   

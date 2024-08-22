@@ -14,7 +14,7 @@ class EmberQuestGame extends FlameGame
   late UniqueKey lastBlockKey;
   late List<List<ObjectBlock>> randomSegments;
   double objectSpeed = 0.0;
-  EmberPlayer? _ember;
+  late EmberPlayer _ember;
   int starsCollected = 0;
   int health = 3;
 
@@ -125,7 +125,7 @@ class EmberQuestGame extends FlameGame
     remainingTime = 60;
     requiredStars = 5;
     currentLevel = 1;
-    _ember = null;
+    _ember.removeFromParent();
 
     // Generate new random segments
     randomSegments = generateRandomSegments(10);
@@ -199,6 +199,7 @@ class EmberQuestGame extends FlameGame
     health = 3;
     remainingTime = 60 * (currentLevel / 2).round();
     requiredStars = requiredStars * currentLevel;
+    _ember.removeFromParent();
     initializeGame(false);
     startTimer();
   }
