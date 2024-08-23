@@ -29,7 +29,7 @@ class GroundBlock extends SpriteComponent
       game.size.y - gridPosition.y * size.y,
     );
     add(RectangleHitbox(collisionType: CollisionType.passive));
-    if (gridPosition.x == 9 && position.x > game.lastBlockXPosition) {
+    if (gridPosition.x == 9 && position.x >= game.lastBlockXPosition) {
       game.lastBlockKey = _blockKey;
       game.lastBlockXPosition = position.x + size.x;
     }

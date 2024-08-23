@@ -43,19 +43,21 @@ class EmberPlayer extends SpriteAnimationComponent
   @override
   bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     horizontalDirection = 0;
-    horizontalDirection += (keysPressed.contains(LogicalKeyboardKey.keyA) ||
-            keysPressed.contains(LogicalKeyboardKey.arrowLeft))
-        ? -1
-        : 0;
-    horizontalDirection += (keysPressed.contains(LogicalKeyboardKey.keyD) ||
-            keysPressed.contains(LogicalKeyboardKey.arrowRight))
-        ? 1
-        : 0;
+    if (keysPressed.contains(LogicalKeyboardKey.keyA) ||
+        keysPressed.contains(LogicalKeyboardKey.arrowLeft)) {
+      movePlayer(Direction.left);
+    }
+    if (keysPressed.contains(LogicalKeyboardKey.keyD) ||
+        keysPressed.contains(LogicalKeyboardKey.arrowRight)) {
+      movePlayer(Direction.right);
+    }
 
-    hasJumped = keysPressed.contains(LogicalKeyboardKey.space);
+    if (keysPressed.contains(LogicalKeyboardKey.space)) {
+      jumpPlayer();
+    }
 
     if (keysPressed.contains(LogicalKeyboardKey.keyE)) {
-      game.fireWeapon();
+      fireWeapon();
     }
 
     return true;
@@ -109,6 +111,40 @@ class EmberPlayer extends SpriteAnimationComponent
           hitByEnemy = false;
         },
     );
+  }
+
+  void movePlayer(Direction direction) {
+    switch (direction) {
+      case Direction.left:
+        horizontalDirection = -1;
+        break;
+      case Direction.right:
+        horizontalDirection = 1;
+        break;
+      case Direction.none:
+        break;
+    }
+  }
+
+  void jumpPlayer() {
+    hasJumped = true;
+    FlameAudio.play('jump.mp3');
+  }
+
+  void stopPlayer() {
+    horizontalDirection = 0;
+  }
+
+  void fireWeapon() {
+    final fireWeapon = FireWeapon(
+      initialPosition: position +
+          Vector2(16, 0), // Position the fireball relative to the player
+      direction: direction == Direction.left
+          ? Vector2(-0.5, 0)
+          : Vector2(0.5, 0), // Move to the right
+    );
+    game.add(fireWeapon);
+    FlameAudio.play('gun.mp3');
   }
 
   @override

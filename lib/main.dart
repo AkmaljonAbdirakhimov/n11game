@@ -19,10 +19,10 @@ void main() {
     GameWidget<EmberQuestGame>.controlled(
       gameFactory: EmberQuestGame.new,
       overlayBuilderMap: {
-        'MainMenu': (_, game) => MainMenu(game: game),
-        'GameOver': (_, game) => GameOver(game: game),
-        'GameControls': (_, game) => GameControls(game: game),
-        'NextLevel': (_, game) => NextLevelOverlay(game: game),
+        'MainMenu': (context, game) => MainMenu(game: game),
+        'GameOver': (context, game) => GameOver(game: game),
+        'GameControls': (context, game) => GameControls(game: game),
+        'NextLevel': (context, game) => NextLevelOverlay(game: game),
       },
       initialActiveOverlays: const ['MainMenu', 'GameControls'],
     ),

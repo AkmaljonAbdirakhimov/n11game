@@ -1,11 +1,10 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-
-import '../actors/actors.dart';
+import 'package:n11game/actors/enemy.dart';
 
 class HealthBar extends PositionComponent {
-  final WaterBigEnemy enemy;
+  final Enemy enemy;
   final double maxWidth;
   late RectangleComponent _bar;
 
@@ -31,7 +30,11 @@ class HealthBar extends PositionComponent {
   void update(double dt) {
     super.update(dt);
     // Update the width of the health bar based on the enemy's current health
-    _bar.size.x = (enemy.health / 30) * maxWidth;
+    _bar.size.x =
+        ((enemy.health / enemy.maxHealth) * maxWidth).ceil().toDouble();
+    if (_bar.size.x <= 0) {
+      removeFromParent();
+    }
     // Position the health bar above the enemy
     position = enemy.position - Vector2(0, enemy.size.y + 10);
   }

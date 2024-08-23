@@ -4,12 +4,16 @@ import 'package:flame/effects.dart';
 
 import '../ember_quest.dart';
 import '../objects/objects.dart';
+import 'actors.dart';
 
-class WaterBigEnemy extends SpriteAnimationComponent
+class WaterBigEnemy extends Enemy
     with CollisionCallbacks, HasGameReference<EmberQuestGame> {
   final Vector2 gridPosition;
   double xOffset;
+  @override
   int health = 30;
+  @override
+  int maxHealth = 30;
 
   final Vector2 velocity = Vector2.zero();
 
