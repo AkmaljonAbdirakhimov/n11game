@@ -39,7 +39,9 @@ class GameControls extends StatelessWidget {
             // Weapon
             ElevatedButton(
               onPressed: () {
-                game.ember.fireWeapon();
+                if (game.isGameStarted) {
+                  game.ember.fireWeapon();
+                }
               },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
@@ -51,7 +53,11 @@ class GameControls extends StatelessWidget {
             const SizedBox(width: 20),
             // Jump button
             ElevatedButton(
-              onPressed: () => game.ember.jumpPlayer(),
+              onPressed: () {
+                if (game.isGameStarted) {
+                  game.ember.jumpPlayer();
+                }
+              },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(30),
