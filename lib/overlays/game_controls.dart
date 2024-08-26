@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:n11game/ember_quest.dart';
+import 'package:pixelbek/ember_quest.dart';
 
 import 'joystick.dart';
 

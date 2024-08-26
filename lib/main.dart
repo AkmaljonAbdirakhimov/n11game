@@ -1,9 +1,9 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:n11game/ember_quest.dart';
-import 'package:n11game/overlays/level_details.dart';
-import 'package:n11game/overlays/next_level.dart';
+import 'package:pixelbek/ember_quest.dart';
+import 'package:pixelbek/overlays/level_details.dart';
+import 'package:pixelbek/overlays/next_level.dart';
 
 import 'overlays/overlays.dart';
 

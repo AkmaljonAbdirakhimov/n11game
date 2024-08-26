@@ -3,7 +3,7 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
-import 'package:n11game/managers/level_manager.dart';
+import 'package:pixelbek/managers/level_manager.dart';
 
 import 'actors/actors.dart';
 import 'managers/segment_manager.dart';

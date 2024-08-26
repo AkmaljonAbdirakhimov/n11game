@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:n11game/actors/enemy.dart';
+import 'package:pixelbek/actors/enemy.dart';
 
 class HealthBar extends PositionComponent {
   final Enemy enemy;

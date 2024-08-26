@@ -1,4 +1,4 @@
-package com.example.n11game
+package uz.pixelbek.game
 
 import io.flutter.embedding.android.FlutterActivity
 

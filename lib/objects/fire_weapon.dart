@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/collisions.dart';
-import 'package:n11game/objects/objects.dart';
+import 'package:pixelbek/objects/objects.dart';
 import '../ember_quest.dart';
 
 class FireWeapon extends SpriteAnimationComponent
