@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import '../ember_quest.dart';
 
-class NextLevelOverlay extends StatelessWidget {
+class LevelDetailsOverlay extends StatelessWidget {
   final EmberQuestGame game;
 
-  const NextLevelOverlay({super.key, required this.game});
+  const LevelDetailsOverlay({super.key, required this.game});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -19,7 +19,7 @@ class NextLevelOverlay extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Congratulations!'.toUpperCase(),
+              'LEVEL ${game.currentLevel}',
               style: const TextStyle(
                 fontSize: 24,
                 color: Colors.black,
@@ -27,20 +27,23 @@ class NextLevelOverlay extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'You cleared the level!',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.black,
-              ),
+            Text(
+              'TIME: ${game.remainingTime} seconds\n'
+              'STARS: ${game.requiredStars} stars',
+              style: const TextStyle(fontSize: 18, color: Colors.black),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                game.overlays.remove('NextLevel');
-                game.overlays.add('LevelDetails');
+                game.startNextLevel();
+                game.overlays.remove('LevelDetails');
               },
-              child: const Text('Start Next Level'),
+              child: const Text(
+                'START',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),

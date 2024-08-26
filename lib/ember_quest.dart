@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
+import 'package:n11game/managers/level_manager.dart';
 
 import 'actors/actors.dart';
 import 'managers/segment_manager.dart';
@@ -15,8 +14,9 @@ class EmberQuestGame extends FlameGame
     with HasCollisionDetection, HasKeyboardHandlerComponents {
   late double lastBlockXPosition = 0.0;
   late UniqueKey lastBlockKey;
-  double objectSpeed = 0.0;
   late EmberPlayer ember;
+  bool isGameStarted = false;
+  double objectSpeed = 0.0;
   int starsCollected = 0;
   int health = 3;
 
@@ -36,23 +36,15 @@ class EmberQuestGame extends FlameGame
       'heart.png',
       'star.png',
       'water_enemy.png',
-      'water_big_enemy.png',
       'fire.png',
     ]);
     await FlameAudio.audioCache.loadAll([
       'gun.mp3',
-      'start.mp3',
-      'game_over.mp3',
       'jump.mp3',
     ]);
 
     camera.viewfinder.anchor = Anchor.topLeft;
     camera.viewport.add(Hud());
-  }
-
-  start() {
-    initializeGame(true);
-    startTimer();
   }
 
   void initializeGame(bool loadHud) {
@@ -74,7 +66,8 @@ class EmberQuestGame extends FlameGame
   }
 
   void loadGameSegments(int segmentIndex, double xPositionOffset) {
-    for (final block in segments[segmentIndex]) {
+    final randomSegments = LevelGenerator().generateLevel(5);
+    for (final block in randomSegments[segmentIndex]) {
       switch (block.blockType) {
         case const (GroundBlock):
           world.add(
@@ -157,12 +150,19 @@ class EmberQuestGame extends FlameGame
   void checkGameEnd() {
     if (starsCollected >= requiredStars) {
       // Move to next level
+      world.removeAll(world.children.query<PositionComponent>());
       overlays.add('NextLevel');
+      increaseLevel();
       gameTimer.timer.stop();
     }
   }
 
   void startNextLevel() {
+    initializeGame(true);
+    startTimer();
+  }
+
+  void increaseLevel() {
     world.removeAll(world.children.query<PositionComponent>());
     currentLevel++;
     starsCollected = 0;
@@ -170,7 +170,7 @@ class EmberQuestGame extends FlameGame
     remainingTime = 60 * (currentLevel / 2).round();
     requiredStars = requiredStars * currentLevel;
     ember.removeFromParent();
-    initializeGame(false);
-    startTimer();
+
+    isGameStarted = true;
   }
 }

@@ -24,6 +24,4 @@ flutter:
   assets:
     - assets/images/
     - assets/audio/gun.mp3
-    - assets/audio/game_over.mp3
     - assets/audio/jump.mp3
-    - assets/audio/start.mp3

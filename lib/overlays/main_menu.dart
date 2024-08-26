@@ -20,7 +20,6 @@ class MainMenu extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           width: 300,
           decoration: const BoxDecoration(
-            color: blackTextColor,
             borderRadius: BorderRadius.all(
               Radius.circular(20),
             ),
@@ -29,20 +28,15 @@ class MainMenu extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Ember Quest',
-                style: TextStyle(
-                  color: whiteTextColor,
-                  fontSize: 22,
-                ),
-              ),
+              Image.asset("assets/images/logo.png"),
               const SizedBox(height: 10),
               SizedBox(
                 width: 150,
                 child: ElevatedButton(
                   onPressed: () {
-                    game.start();
+                    // game.start();
                     game.overlays.remove('MainMenu');
+                    game.overlays.add('LevelDetails');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: whiteTextColor,
@@ -58,12 +52,14 @@ class MainMenu extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Text(
-                '''Use WASD or Arrow Keys for movement.
-Space bar to jump.
-Collect as many stars as you can and avoid enemies!''',
+                '''
+• Use joystick to go LEFT or RIGHT
+• Press FIRE button to shoot an enemy
+• Press JUMP button to jump over the objects
+''',
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: whiteTextColor,
+                  color: blackTextColor,
                   fontSize: 14,
                 ),
               ),

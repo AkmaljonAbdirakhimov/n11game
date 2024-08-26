@@ -20,7 +20,6 @@ class GameOver extends StatelessWidget {
           height: 200,
           width: 300,
           decoration: const BoxDecoration(
-            color: blackTextColor,
             borderRadius: BorderRadius.all(
               Radius.circular(20),
             ),
@@ -31,8 +30,9 @@ class GameOver extends StatelessWidget {
               const Text(
                 'Game Over',
                 style: TextStyle(
-                  color: whiteTextColor,
-                  fontSize: 22,
+                  color: blackTextColor,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 20),
@@ -49,7 +49,7 @@ class GameOver extends StatelessWidget {
                   child: const Text(
                     'Play Again',
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: 16.0,
                       color: blackTextColor,
                     ),
                   ),

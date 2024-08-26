@@ -88,7 +88,7 @@ class EmberPlayer extends SpriteAnimationComponent
       game.starsCollected++;
     }
 
-    if (other is WaterEnemy || other is WaterBigEnemy) {
+    if (other is WaterEnemy) {
       hit();
     }
 
